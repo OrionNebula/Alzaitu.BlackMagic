@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace Alzaitu.BlackMagic.Core
 {
     [Serializable]
-    public unsafe class ObjectPlacement<T> : ISerializable
+    public class ObjectPlacement<T> : ISerializable
     {
         private FakeTypedReference _typedReference;
 
@@ -22,9 +22,8 @@ namespace Alzaitu.BlackMagic.Core
         /// <param name="field">The field to reference.</param>
         public ObjectPlacement(ref T field)
         {
-            var r = __makeref(field);
-            Address = *(IntPtr*) &r;
-            _typedReference = new FakeTypedReference(Address, typeof(T));
+            _typedReference = new FakeTypedReference(__makeref(field));
+            Address = _typedReference.Value;
         }
 
         /// <summary>

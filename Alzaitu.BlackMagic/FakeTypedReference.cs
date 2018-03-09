@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-// ReSharper disable PrivateFieldCanBeConvertedToLocalVariable
 
 namespace Alzaitu.BlackMagic
 {
@@ -10,8 +9,15 @@ namespace Alzaitu.BlackMagic
     [StructLayout(LayoutKind.Sequential)]
     internal unsafe struct FakeTypedReference
     {
-        private readonly IntPtr _value;
-        private readonly IntPtr _type;
+        public readonly IntPtr Value;
+        public readonly IntPtr Type;
+
+        public FakeTypedReference(TypedReference reference)
+        {
+            var fake = *(FakeTypedReference*) &reference;
+            Value = fake.Value;
+            Type = fake.Type;
+        }
 
         public FakeTypedReference(IntPtr value, Type type) : this(value, type.TypeHandle.Value)
         {
@@ -20,8 +26,8 @@ namespace Alzaitu.BlackMagic
 
         public FakeTypedReference(IntPtr value, IntPtr type)
         {
-            _value = value;
-            _type = type;
+            Value = value;
+            Type = type;
         }
 
         public T GetValue<T>()
