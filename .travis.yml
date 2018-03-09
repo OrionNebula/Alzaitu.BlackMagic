@@ -1,0 +1,8 @@
+language: csharp
+solution: Alzaitu.BlackMagic.sln
+install:
+    - nuget restore Alzaitu.BlackMagic.sln
+    - nuget install NUnit.Console -Version 3.8.0 -OutputDirectory testrunner
+script:
+    - xbuild /p:Configuration=Release Alzaitu.BlackMagic.sln
+    - mono ./testrunner/NUnit.ConsoleRunner.3.8.0/tools/nunit3-console.exe ./Alzaitu.BlackMagic.Tests/bin/Release/Alzaitu.BlackMagic.Tests.dll
