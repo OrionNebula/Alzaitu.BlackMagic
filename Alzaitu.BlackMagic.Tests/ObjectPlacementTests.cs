@@ -38,8 +38,8 @@ namespace Alzaitu.BlackMagic.Tests
                 ApplicationBase = AppDomain.CurrentDomain.BaseDirectory
             });
             _array = Enumerable.Range(0, 100).Select(x => Guid.NewGuid()).ToArray();
-            var placement = new ObjectPlacement<Guid[]>(Marshal.AllocHGlobal(100));
-            placement.Value = _array;
+            var placement = new ObjectPlacement<Guid[]>(ref _array);
+            //placement.Value = _array;
             domain.SetData(nameof(_array), placement);
             domain.SetData(nameof(Guid), _array);
             domain.DoCallBack(AppDomainCallback);
