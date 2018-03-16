@@ -1,7 +1,6 @@
 ﻿using NUnit.Framework;
 using System;
 using System.Linq;
-using System.Runtime.InteropServices;
 
 namespace Alzaitu.BlackMagic.Tests
 {
@@ -11,23 +10,20 @@ namespace Alzaitu.BlackMagic.Tests
         private static Guid[] _array;
 
         [Test]
-        public void TestGcSurvival()
+        public void TestAppDomainCallbacks()
         {
-            var testString = Guid.NewGuid().ToString();
-
-            var ptr = Marshal.AllocHGlobal(IntPtr.Size);
-
-            var placement = new ObjectPlacement<string>(ptr) {Value = testString};
-
-            for (var i = 0; i < 10; i++)
+            var domain = AppDomain.CreateDomain("TestCrossDomain", null, new AppDomainSetup
             {
-                GC.KeepAlive(new byte[4096]);
-                GC.Collect();
-            }
+                ApplicationBase = AppDomain.CurrentDomain.BaseDirectory
+            });
+            var guid = Guid.NewGuid();
+            var callback = domain.CreateDelegate<string, Guid>(AppDomainCallback);
+            Assert.AreEqual(guid.ToString(), callback(guid));
+        }
 
-            Assert.AreEqual(placement.Value, testString);
-
-            Marshal.FreeHGlobal(ptr);
+        private static string AppDomainCallback(Guid guid)
+        {
+            return guid.ToString();
         }
 
         [Test]

@@ -1,17 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2026
+VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alzaitu.BlackMagic", "Alzaitu.BlackMagic\Alzaitu.BlackMagic.csproj", "{8AA215AD-0DA8-4F23-8380-80498E1DE0C7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alzaitu.BlackMagic.Tests", "Alzaitu.BlackMagic.Tests\Alzaitu.BlackMagic.Tests.csproj", "{8EDF4429-251A-416D-BB68-93F227191BCF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alzaitu.BlackMagic.Core", "Alzaitu.BlackMagic.Core\Alzaitu.BlackMagic.Core.csproj", "{9CA49C05-64DE-4997-8820-0BADBB012073}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alzaitu.BlackMagic.Core", "Alzaitu.BlackMagic.Core\Alzaitu.BlackMagic.Core.csproj", "{9CA49C05-64DE-4997-8820-0BADBB012073}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alzaitu.BlackMagic.Core.Tests", "Alzaitu.BlackMagic.Core.Tests\Alzaitu.BlackMagic.Core.Tests.csproj", "{FFB18554-EE85-4499-9CDA-C7CF2E912121}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alzaitu.BlackMagic.Core.Tests", "Alzaitu.BlackMagic.Core.Tests\Alzaitu.BlackMagic.Core.Tests.csproj", "{FFB18554-EE85-4499-9CDA-C7CF2E912121}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{236B6465-2B12-4D2C-9DBB-DED4425554A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alzaitu.BlackMagic.Example", "Alzaitu.BlackMagic.Example\Alzaitu.BlackMagic.Example.csproj", "{81D933F9-851A-4B87-8611-91593A2A5777}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +37,10 @@ Global
 		{FFB18554-EE85-4499-9CDA-C7CF2E912121}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FFB18554-EE85-4499-9CDA-C7CF2E912121}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FFB18554-EE85-4499-9CDA-C7CF2E912121}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81D933F9-851A-4B87-8611-91593A2A5777}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81D933F9-851A-4B87-8611-91593A2A5777}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81D933F9-851A-4B87-8611-91593A2A5777}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81D933F9-851A-4B87-8611-91593A2A5777}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

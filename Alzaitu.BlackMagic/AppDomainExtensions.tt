@@ -1,0 +1,60 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+using System;
+
+namespace Alzaitu.BlackMagic
+{
+	public static class AppDomainExtensions
+	{
+		public static void DoCallBack(this AppDomain domain, Action action)
+		{
+			domain.DoCallBack(new CrossAppDomainDelegate(action));
+		}
+
+		<# for(var i = 1; i <= 10; i++) { #>
+
+		public static void DoCallBack<<#= string.Join(", ", Enumerable.Range(1, i).Select(x => $"T{x}")) #>>(this AppDomain domain, Action<<#= string.Join(", ", Enumerable.Range(1, i).Select(x => $"T{x}")) #>> action, <#= string.Join(", ", Enumerable.Range(1, i).Select(x => $"T{x} a{x}")) #>)
+		{
+			domain.SetData("action", new ObjectPlacement<Action<<#= string.Join(", ", Enumerable.Range(1, i).Select(x => $"T{x}")) #>>>(ref action));
+			domain.SetData("arr", new object[]{ <#= string.Join(", ", Enumerable.Range(1, i).Select(x => $"new ObjectPlacement<T{x}>(ref a{x})")) #> });
+			domain.DoCallBack(() =>
+			{
+				var cAction = ((ObjectPlacement<Action<<#= string.Join(", ", Enumerable.Range(1, i).Select(x => $"T{x}")) #>>>)AppDomain.CurrentDomain.GetData("action")).Value;
+				var arr = (object[])AppDomain.CurrentDomain.GetData("arr");
+				cAction(<#= string.Join(", ", Enumerable.Range(0, i).Select(x => $"(ObjectPlacement<T{x+1}>)arr[{x}]")) #>);
+			});
+		}
+
+		public static Action<<#= string.Join(", ", Enumerable.Range(1, i).Select(x => $"T{x}")) #>> CreateDelegate<<#= string.Join(", ", Enumerable.Range(1, i).Select(x => $"T{x}")) #>>(this AppDomain domain, Action<<#= string.Join(", ", Enumerable.Range(1, i).Select(x => $"T{x}")) #>> action)
+		{
+			return (<#= string.Join(", ", Enumerable.Range(1, i).Select(x => $"a{x}")) #>) => domain.DoCallBack(action, <#= string.Join(", ", Enumerable.Range(1, i).Select(x => $"a{x}")) #>);
+		}
+		<# } #>
+		<# for(var i = 1; i <= 10; i++) { #>
+
+		public static TReturn DoCallBack<TReturn, <#= string.Join(", ", Enumerable.Range(1, i).Select(x => $"T{x}")) #>>(this AppDomain domain, Func<<#= string.Join(", ", Enumerable.Range(1, i).Select(x => $"T{x}")) #>, TReturn> action, <#= string.Join(", ", Enumerable.Range(1, i).Select(x => $"T{x} a{x}")) #>)
+		{
+			var ret = default(TReturn);
+			domain.SetData("res", new ObjectPlacement<TReturn>(ref ret));
+			domain.SetData("action", new ObjectPlacement<Func<<#= string.Join(", ", Enumerable.Range(1, i).Select(x => $"T{x}")) #>, TReturn>>(ref action));
+			domain.SetData("arr", new object[]{ <#= string.Join(", ", Enumerable.Range(1, i).Select(x => $"new ObjectPlacement<T{x}>(ref a{x})")) #> });
+			domain.DoCallBack(() =>
+			{
+				var cAction = ((ObjectPlacement<Func<<#= string.Join(", ", Enumerable.Range(1, i).Select(x => $"T{x}")) #>, TReturn>>)AppDomain.CurrentDomain.GetData("action")).Value;
+				var arr = (object[])AppDomain.CurrentDomain.GetData("arr");
+				((ObjectPlacement<TReturn>)AppDomain.CurrentDomain.GetData("res")).Value = cAction(<#= string.Join(", ", Enumerable.Range(0, i).Select(x => $"(ObjectPlacement<T{x+1}>)arr[{x}]")) #>);
+			});
+			return ret;
+		}
+
+		public static Func<<#= string.Join(", ", Enumerable.Range(1, i).Select(x => $"T{x}")) #>, TReturn> CreateDelegate<TReturn, <#= string.Join(", ", Enumerable.Range(1, i).Select(x => $"T{x}")) #>>(this AppDomain domain, Func<<#= string.Join(", ", Enumerable.Range(1, i).Select(x => $"T{x}")) #>, TReturn> action)
+		{
+			return (<#= string.Join(", ", Enumerable.Range(1, i).Select(x => $"a{x}")) #>) => domain.DoCallBack(action, <#= string.Join(", ", Enumerable.Range(1, i).Select(x => $"a{x}")) #>);
+		}
+		<# } #>
+	}
+}
