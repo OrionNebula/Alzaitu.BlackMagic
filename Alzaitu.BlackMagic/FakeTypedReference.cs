@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 namespace Alzaitu.BlackMagic
@@ -33,7 +34,10 @@ namespace Alzaitu.BlackMagic
         public T GetValue<T>()
         {
             fixed (FakeTypedReference* ptr = &this)
-                return __refvalue(*(TypedReference*) ptr, T);
+            {
+                //Console.WriteLine("{0}: {1} / {2}", AppDomain.CurrentDomain.FriendlyName, __reftype(*(TypedReference*)ptr), Type);
+                return __refvalue(*(TypedReference*)ptr, T);
+            }
         }
 
         public void SetValue<T>(T value)

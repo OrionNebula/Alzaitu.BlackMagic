@@ -1,13 +1,39 @@
 ﻿using NUnit.Framework;
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace Alzaitu.BlackMagic.Tests
 {
+    public class TestClass
+    {
+        public string TestProp;
+    }
+
     [TestFixture]
     public class ObjectPlacementTests
     {
         private static Guid[] _array;
+
+        //public static TestClass A = ObjectPlacement.GetOrCreate(() => A, ref A, () => new TestClass());
+
+        [Test]
+        public void TestStaticProperty()
+        {
+            Debug.WriteLine(AppDomain.CurrentDomain.IsDefaultAppDomain());
+
+            /*var domain = AppDomain.CreateDomain("TestDomain", null, new AppDomainSetup
+            {
+                ApplicationBase = AppDomain.CurrentDomain.BaseDirectory
+            });
+            A.TestProp = Guid.NewGuid().ToString();
+            ObjectPlacement.WrapDomain(domain);
+            domain.DoCallBack(x =>
+            {
+                Assert.AreEqual(x, A.TestProp);
+            }, A.TestProp);*/
+        }
 
         [Test]
         public void TestAppDomainCallbacks()
@@ -16,14 +42,15 @@ namespace Alzaitu.BlackMagic.Tests
             {
                 ApplicationBase = AppDomain.CurrentDomain.BaseDirectory
             });
-            var guid = Guid.NewGuid();
-            var callback = domain.CreateDelegate<string, Guid>(AppDomainCallback);
-            Assert.AreEqual(guid.ToString(), callback(guid));
+            var guid = new Dictionary<string, string>(Enumerable.Range(0, 100).Select(x => Guid.NewGuid().ToString()).ToDictionary(x => x, x => x));
+            var callback = domain.CreateDelegate<Dictionary<string, string>, string>(AppDomainCallback);
+            Assert.AreEqual(string.Join(", ", guid.Select(x => x.Key.ToString())), callback(guid));
         }
 
-        private static string AppDomainCallback(Guid guid)
+        private static string AppDomainCallback(Dictionary<string, string> guid)
         {
-            return guid.ToString();
+            Debug.WriteLine(AppDomain.CurrentDomain.FriendlyName);
+            return string.Join(", ", guid.Select(x => x.Key.ToString()));
         }
 
         [Test]
@@ -35,7 +62,6 @@ namespace Alzaitu.BlackMagic.Tests
             });
             _array = Enumerable.Range(0, 100).Select(x => Guid.NewGuid()).ToArray();
             var placement = new ObjectPlacement<Guid[]>(ref _array);
-            //placement.Value = _array;
             domain.SetData(nameof(_array), placement);
             domain.SetData(nameof(Guid), _array);
             domain.DoCallBack(AppDomainCallback);
