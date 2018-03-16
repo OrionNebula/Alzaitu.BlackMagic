@@ -180,7 +180,7 @@ namespace Alzaitu.BlackMagic
 			return (a1, a2, a3, a4, a5, a6, a7, a8, a9, a10) => domain.DoCallBack(action, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10);
 		}
 				
-		public static TReturn DoCallBack<TReturn, T1>(this AppDomain domain, Func<T1, TReturn> action, T1 a1)
+		public static TReturn DoCallBack<T1, TReturn>(this AppDomain domain, Func<T1, TReturn> action, T1 a1)
 		{
 			var ret = default(TReturn);
 			domain.SetData("res", new ObjectPlacement<TReturn>(ref ret));
@@ -195,12 +195,12 @@ namespace Alzaitu.BlackMagic
 			return ret;
 		}
 
-		public static Func<T1, TReturn> CreateDelegate<TReturn, T1>(this AppDomain domain, Func<T1, TReturn> action)
+		public static Func<T1, TReturn> CreateDelegate<T1, TReturn>(this AppDomain domain, Func<T1, TReturn> action)
 		{
 			return (a1) => domain.DoCallBack(action, a1);
 		}
 		
-		public static TReturn DoCallBack<TReturn, T1, T2>(this AppDomain domain, Func<T1, T2, TReturn> action, T1 a1, T2 a2)
+		public static TReturn DoCallBack<T1, T2, TReturn>(this AppDomain domain, Func<T1, T2, TReturn> action, T1 a1, T2 a2)
 		{
 			var ret = default(TReturn);
 			domain.SetData("res", new ObjectPlacement<TReturn>(ref ret));
@@ -215,12 +215,12 @@ namespace Alzaitu.BlackMagic
 			return ret;
 		}
 
-		public static Func<T1, T2, TReturn> CreateDelegate<TReturn, T1, T2>(this AppDomain domain, Func<T1, T2, TReturn> action)
+		public static Func<T1, T2, TReturn> CreateDelegate<T1, T2, TReturn>(this AppDomain domain, Func<T1, T2, TReturn> action)
 		{
 			return (a1, a2) => domain.DoCallBack(action, a1, a2);
 		}
 		
-		public static TReturn DoCallBack<TReturn, T1, T2, T3>(this AppDomain domain, Func<T1, T2, T3, TReturn> action, T1 a1, T2 a2, T3 a3)
+		public static TReturn DoCallBack<T1, T2, T3, TReturn>(this AppDomain domain, Func<T1, T2, T3, TReturn> action, T1 a1, T2 a2, T3 a3)
 		{
 			var ret = default(TReturn);
 			domain.SetData("res", new ObjectPlacement<TReturn>(ref ret));
@@ -235,12 +235,12 @@ namespace Alzaitu.BlackMagic
 			return ret;
 		}
 
-		public static Func<T1, T2, T3, TReturn> CreateDelegate<TReturn, T1, T2, T3>(this AppDomain domain, Func<T1, T2, T3, TReturn> action)
+		public static Func<T1, T2, T3, TReturn> CreateDelegate<T1, T2, T3, TReturn>(this AppDomain domain, Func<T1, T2, T3, TReturn> action)
 		{
 			return (a1, a2, a3) => domain.DoCallBack(action, a1, a2, a3);
 		}
 		
-		public static TReturn DoCallBack<TReturn, T1, T2, T3, T4>(this AppDomain domain, Func<T1, T2, T3, T4, TReturn> action, T1 a1, T2 a2, T3 a3, T4 a4)
+		public static TReturn DoCallBack<T1, T2, T3, T4, TReturn>(this AppDomain domain, Func<T1, T2, T3, T4, TReturn> action, T1 a1, T2 a2, T3 a3, T4 a4)
 		{
 			var ret = default(TReturn);
 			domain.SetData("res", new ObjectPlacement<TReturn>(ref ret));
@@ -255,12 +255,12 @@ namespace Alzaitu.BlackMagic
 			return ret;
 		}
 
-		public static Func<T1, T2, T3, T4, TReturn> CreateDelegate<TReturn, T1, T2, T3, T4>(this AppDomain domain, Func<T1, T2, T3, T4, TReturn> action)
+		public static Func<T1, T2, T3, T4, TReturn> CreateDelegate<T1, T2, T3, T4, TReturn>(this AppDomain domain, Func<T1, T2, T3, T4, TReturn> action)
 		{
 			return (a1, a2, a3, a4) => domain.DoCallBack(action, a1, a2, a3, a4);
 		}
 		
-		public static TReturn DoCallBack<TReturn, T1, T2, T3, T4, T5>(this AppDomain domain, Func<T1, T2, T3, T4, T5, TReturn> action, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5)
+		public static TReturn DoCallBack<T1, T2, T3, T4, T5, TReturn>(this AppDomain domain, Func<T1, T2, T3, T4, T5, TReturn> action, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5)
 		{
 			var ret = default(TReturn);
 			domain.SetData("res", new ObjectPlacement<TReturn>(ref ret));
@@ -275,12 +275,12 @@ namespace Alzaitu.BlackMagic
 			return ret;
 		}
 
-		public static Func<T1, T2, T3, T4, T5, TReturn> CreateDelegate<TReturn, T1, T2, T3, T4, T5>(this AppDomain domain, Func<T1, T2, T3, T4, T5, TReturn> action)
+		public static Func<T1, T2, T3, T4, T5, TReturn> CreateDelegate<T1, T2, T3, T4, T5, TReturn>(this AppDomain domain, Func<T1, T2, T3, T4, T5, TReturn> action)
 		{
 			return (a1, a2, a3, a4, a5) => domain.DoCallBack(action, a1, a2, a3, a4, a5);
 		}
 		
-		public static TReturn DoCallBack<TReturn, T1, T2, T3, T4, T5, T6>(this AppDomain domain, Func<T1, T2, T3, T4, T5, T6, TReturn> action, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6)
+		public static TReturn DoCallBack<T1, T2, T3, T4, T5, T6, TReturn>(this AppDomain domain, Func<T1, T2, T3, T4, T5, T6, TReturn> action, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6)
 		{
 			var ret = default(TReturn);
 			domain.SetData("res", new ObjectPlacement<TReturn>(ref ret));
@@ -295,12 +295,12 @@ namespace Alzaitu.BlackMagic
 			return ret;
 		}
 
-		public static Func<T1, T2, T3, T4, T5, T6, TReturn> CreateDelegate<TReturn, T1, T2, T3, T4, T5, T6>(this AppDomain domain, Func<T1, T2, T3, T4, T5, T6, TReturn> action)
+		public static Func<T1, T2, T3, T4, T5, T6, TReturn> CreateDelegate<T1, T2, T3, T4, T5, T6, TReturn>(this AppDomain domain, Func<T1, T2, T3, T4, T5, T6, TReturn> action)
 		{
 			return (a1, a2, a3, a4, a5, a6) => domain.DoCallBack(action, a1, a2, a3, a4, a5, a6);
 		}
 		
-		public static TReturn DoCallBack<TReturn, T1, T2, T3, T4, T5, T6, T7>(this AppDomain domain, Func<T1, T2, T3, T4, T5, T6, T7, TReturn> action, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7)
+		public static TReturn DoCallBack<T1, T2, T3, T4, T5, T6, T7, TReturn>(this AppDomain domain, Func<T1, T2, T3, T4, T5, T6, T7, TReturn> action, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7)
 		{
 			var ret = default(TReturn);
 			domain.SetData("res", new ObjectPlacement<TReturn>(ref ret));
@@ -315,12 +315,12 @@ namespace Alzaitu.BlackMagic
 			return ret;
 		}
 
-		public static Func<T1, T2, T3, T4, T5, T6, T7, TReturn> CreateDelegate<TReturn, T1, T2, T3, T4, T5, T6, T7>(this AppDomain domain, Func<T1, T2, T3, T4, T5, T6, T7, TReturn> action)
+		public static Func<T1, T2, T3, T4, T5, T6, T7, TReturn> CreateDelegate<T1, T2, T3, T4, T5, T6, T7, TReturn>(this AppDomain domain, Func<T1, T2, T3, T4, T5, T6, T7, TReturn> action)
 		{
 			return (a1, a2, a3, a4, a5, a6, a7) => domain.DoCallBack(action, a1, a2, a3, a4, a5, a6, a7);
 		}
 		
-		public static TReturn DoCallBack<TReturn, T1, T2, T3, T4, T5, T6, T7, T8>(this AppDomain domain, Func<T1, T2, T3, T4, T5, T6, T7, T8, TReturn> action, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8)
+		public static TReturn DoCallBack<T1, T2, T3, T4, T5, T6, T7, T8, TReturn>(this AppDomain domain, Func<T1, T2, T3, T4, T5, T6, T7, T8, TReturn> action, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8)
 		{
 			var ret = default(TReturn);
 			domain.SetData("res", new ObjectPlacement<TReturn>(ref ret));
@@ -335,12 +335,12 @@ namespace Alzaitu.BlackMagic
 			return ret;
 		}
 
-		public static Func<T1, T2, T3, T4, T5, T6, T7, T8, TReturn> CreateDelegate<TReturn, T1, T2, T3, T4, T5, T6, T7, T8>(this AppDomain domain, Func<T1, T2, T3, T4, T5, T6, T7, T8, TReturn> action)
+		public static Func<T1, T2, T3, T4, T5, T6, T7, T8, TReturn> CreateDelegate<T1, T2, T3, T4, T5, T6, T7, T8, TReturn>(this AppDomain domain, Func<T1, T2, T3, T4, T5, T6, T7, T8, TReturn> action)
 		{
 			return (a1, a2, a3, a4, a5, a6, a7, a8) => domain.DoCallBack(action, a1, a2, a3, a4, a5, a6, a7, a8);
 		}
 		
-		public static TReturn DoCallBack<TReturn, T1, T2, T3, T4, T5, T6, T7, T8, T9>(this AppDomain domain, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TReturn> action, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9)
+		public static TReturn DoCallBack<T1, T2, T3, T4, T5, T6, T7, T8, T9, TReturn>(this AppDomain domain, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TReturn> action, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9)
 		{
 			var ret = default(TReturn);
 			domain.SetData("res", new ObjectPlacement<TReturn>(ref ret));
@@ -355,12 +355,12 @@ namespace Alzaitu.BlackMagic
 			return ret;
 		}
 
-		public static Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TReturn> CreateDelegate<TReturn, T1, T2, T3, T4, T5, T6, T7, T8, T9>(this AppDomain domain, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TReturn> action)
+		public static Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TReturn> CreateDelegate<T1, T2, T3, T4, T5, T6, T7, T8, T9, TReturn>(this AppDomain domain, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TReturn> action)
 		{
 			return (a1, a2, a3, a4, a5, a6, a7, a8, a9) => domain.DoCallBack(action, a1, a2, a3, a4, a5, a6, a7, a8, a9);
 		}
 		
-		public static TReturn DoCallBack<TReturn, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this AppDomain domain, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TReturn> action, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10)
+		public static TReturn DoCallBack<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TReturn>(this AppDomain domain, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TReturn> action, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, T9 a9, T10 a10)
 		{
 			var ret = default(TReturn);
 			domain.SetData("res", new ObjectPlacement<TReturn>(ref ret));
@@ -375,7 +375,7 @@ namespace Alzaitu.BlackMagic
 			return ret;
 		}
 
-		public static Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TReturn> CreateDelegate<TReturn, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this AppDomain domain, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TReturn> action)
+		public static Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TReturn> CreateDelegate<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TReturn>(this AppDomain domain, Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TReturn> action)
 		{
 			return (a1, a2, a3, a4, a5, a6, a7, a8, a9, a10) => domain.DoCallBack(action, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10);
 		}

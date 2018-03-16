@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 
 namespace Alzaitu.BlackMagic.Example
 {
@@ -12,7 +13,8 @@ namespace Alzaitu.BlackMagic.Example
                 ApplicationBase = AppDomain.CurrentDomain.BaseDirectory
             });
             var stream = new MemoryStream();
-            Console.WriteLine(domain.CreateDelegate<string, MemoryStream>(AppDomainCallback)(stream));
+
+            Console.WriteLine(domain.DoCallBack(AppDomainCallback, stream));
         }
 
         private static string AppDomainCallback(MemoryStream stream)
@@ -20,7 +22,7 @@ namespace Alzaitu.BlackMagic.Example
             var b = new byte[1024];
             new Random().NextBytes(b);
             stream.Write(b, 0, 1024);
-            return "DO THE THING";
+            return Encoding.ASCII.GetString(b);
         }
     }
 }

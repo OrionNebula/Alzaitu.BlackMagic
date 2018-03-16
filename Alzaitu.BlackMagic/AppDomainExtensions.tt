@@ -36,7 +36,7 @@ namespace Alzaitu.BlackMagic
 		<# } #>
 		<# for(var i = 1; i <= 10; i++) { #>
 
-		public static TReturn DoCallBack<TReturn, <#= string.Join(", ", Enumerable.Range(1, i).Select(x => $"T{x}")) #>>(this AppDomain domain, Func<<#= string.Join(", ", Enumerable.Range(1, i).Select(x => $"T{x}")) #>, TReturn> action, <#= string.Join(", ", Enumerable.Range(1, i).Select(x => $"T{x} a{x}")) #>)
+		public static TReturn DoCallBack<<#= string.Join(", ", Enumerable.Range(1, i).Select(x => $"T{x}")) #>, TReturn>(this AppDomain domain, Func<<#= string.Join(", ", Enumerable.Range(1, i).Select(x => $"T{x}")) #>, TReturn> action, <#= string.Join(", ", Enumerable.Range(1, i).Select(x => $"T{x} a{x}")) #>)
 		{
 			var ret = default(TReturn);
 			domain.SetData("res", new ObjectPlacement<TReturn>(ref ret));
@@ -51,7 +51,7 @@ namespace Alzaitu.BlackMagic
 			return ret;
 		}
 
-		public static Func<<#= string.Join(", ", Enumerable.Range(1, i).Select(x => $"T{x}")) #>, TReturn> CreateDelegate<TReturn, <#= string.Join(", ", Enumerable.Range(1, i).Select(x => $"T{x}")) #>>(this AppDomain domain, Func<<#= string.Join(", ", Enumerable.Range(1, i).Select(x => $"T{x}")) #>, TReturn> action)
+		public static Func<<#= string.Join(", ", Enumerable.Range(1, i).Select(x => $"T{x}")) #>, TReturn> CreateDelegate<<#= string.Join(", ", Enumerable.Range(1, i).Select(x => $"T{x}")) #>, TReturn>(this AppDomain domain, Func<<#= string.Join(", ", Enumerable.Range(1, i).Select(x => $"T{x}")) #>, TReturn> action)
 		{
 			return (<#= string.Join(", ", Enumerable.Range(1, i).Select(x => $"a{x}")) #>) => domain.DoCallBack(action, <#= string.Join(", ", Enumerable.Range(1, i).Select(x => $"a{x}")) #>);
 		}
