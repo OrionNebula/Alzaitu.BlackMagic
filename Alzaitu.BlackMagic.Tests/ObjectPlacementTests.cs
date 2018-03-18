@@ -6,34 +6,10 @@ using System.Linq;
 
 namespace Alzaitu.BlackMagic.Tests
 {
-    public class TestClass
-    {
-        public string TestProp;
-    }
-
     [TestFixture]
     public class ObjectPlacementTests
     {
         private static Guid[] _array;
-
-        //public static TestClass A = ObjectPlacement.GetOrCreate(() => A, ref A, () => new TestClass());
-
-        [Test]
-        public void TestStaticProperty()
-        {
-            Debug.WriteLine(AppDomain.CurrentDomain.IsDefaultAppDomain());
-
-            /*var domain = AppDomain.CreateDomain("TestDomain", null, new AppDomainSetup
-            {
-                ApplicationBase = AppDomain.CurrentDomain.BaseDirectory
-            });
-            A.TestProp = Guid.NewGuid().ToString();
-            ObjectPlacement.WrapDomain(domain);
-            domain.DoCallBack(x =>
-            {
-                Assert.AreEqual(x, A.TestProp);
-            }, A.TestProp);*/
-        }
 
         [Test]
         public void TestAppDomainCallbacks()

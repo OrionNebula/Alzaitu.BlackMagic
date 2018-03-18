@@ -1,72 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 
 namespace Alzaitu.BlackMagic
 {
     public abstract class ObjectPlacement
     {
-        private static ObjectPlacement<Dictionary<string, IntPtr>> _objectPlacements;
-
-        private static ObjectPlacement<Dictionary<string, IntPtr>> ObjectPlacements
-        {
-            get
-            {
-                if (_objectPlacements != null)
-                {
-                    return _objectPlacements;
-                }
-
-                var curDomain = AppDomain.CurrentDomain;
-
-                if (AppDomain.CurrentDomain.IsDefaultAppDomain())
-                {
-                    _objectPlacements =
-                        new ObjectPlacement<Dictionary<string, IntPtr>>(Marshal.AllocHGlobal(IntPtr.Size))
-                        {
-                            Value = new Dictionary<string, IntPtr>()
-                        };
-                    return _objectPlacements;
-                }
-
-                _objectPlacements =
-                    (ObjectPlacement<Dictionary<string, IntPtr>>)curDomain.GetData(nameof(ObjectPlacements));
-                return _objectPlacements;
-            }
-        }
-
         public abstract Type Type { get; }
 
         public abstract object UntypedValue { get; set; }
 
-        public static void WrapDomain(AppDomain target)
-        {
-            var current = AppDomain.CurrentDomain;
-            if(current.GetData(nameof(ObjectPlacements)) == null && !current.IsDefaultAppDomain())
-                throw new InvalidOperationException("Cannot wrap a domain from an unwrapped one.");
-
-            target.SetData(nameof(ObjectPlacements), current.GetData(nameof(ObjectPlacements)) ?? ObjectPlacements);
-        }
-
-        public static T GetOrCreate<T>(Expression<Func<T>> func, ref T obj, Func<T> create)
-        {
-            if(!(func.Body is MemberExpression expr))
-                throw new ArgumentException("Must access a field here.", nameof(func));
-
-            if(!(expr.Member is FieldInfo info))
-                throw new ArgumentException("Must access a field here.", nameof(func));
-
-            var domain = AppDomain.CurrentDomain;
-            if (!domain.IsDefaultAppDomain())
-                return obj = new ObjectPlacement<T>(ObjectPlacements.Value[info.GetFieldSignature()]).Value;
-
-            obj = create();
-            ObjectPlacements.Value[info.GetFieldSignature()] = new ObjectPlacement<T>(ref obj).Address;
-            return obj;
-        }
     }
 
     [Serializable]
