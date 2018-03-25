@@ -3,23 +3,43 @@ using System.Runtime.Serialization;
 
 namespace Alzaitu.BlackMagic
 {
+    /// <summary>
+    /// Abstract parent class for <see cref="ObjectPlacement{T}"/>.
+    /// </summary>
     public abstract class ObjectPlacement
     {
+        /// <summary>
+        /// The type of this ObjectPlacement.
+        /// </summary>
         public abstract Type Type { get; }
 
+        /// <summary>
+        /// The untyped value of this ObjectPlacement.
+        /// </summary>
         public abstract object UntypedValue { get; set; }
 
     }
 
+    /// <summary>
+    /// Holds a reference to an object of a specified type.
+    /// </summary>
+    /// <typeparam name="T">The type of the referenced object.</typeparam>
+    /// <inheritdoc cref="ObjectPlacement"/>
     [Serializable]
     public class ObjectPlacement<T> : ObjectPlacement, ISerializable
     {
         private FakeTypedReference _typedReference;
-
+        
+        /// <summary>
+        /// The address of the reference in memory.
+        /// </summary>
         public IntPtr Address { get; }
 
         public override Type Type => typeof(T);
 
+        /// <summary>
+        /// The value referenced.
+        /// </summary>
         public T Value
         {
             get => _typedReference.GetValue<T>();
@@ -72,12 +92,9 @@ namespace Alzaitu.BlackMagic
         {
             info.SetType(typeof(ObjectPlacement<T>));
             info.AddValue(nameof(Address), Address.ToInt64());
-            //info.AddValue(nameof(RuntimeTypeHandle), _typedReference.Type.ToInt64());
         }
 
         public static implicit operator T(ObjectPlacement<T> obj) => obj.Value;
-
-        public static implicit operator ObjectPlacement<T>(IntPtr ptr) => new ObjectPlacement<T>(ptr);
     }
 }
 
