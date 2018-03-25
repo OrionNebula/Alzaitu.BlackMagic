@@ -2,7 +2,7 @@
 
 namespace Alzaitu.BlackMagic
 {
-	public static class AppDomainExtensions
+	public static partial class AppDomainExtensions
 	{
 		public static void DoCallBack(this AppDomain domain, Action action)
 		{

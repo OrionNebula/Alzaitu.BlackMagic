@@ -51,6 +51,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppDomainExtensions.tt</DependentUpon>
     </Compile>
+    <Compile Include="AppDomainExtensionsCode.cs" />
     <Compile Include="FakeTypedReference.cs" />
     <Compile Include="FieldExtensions.cs" />
     <Compile Include="ObjectPlacement.cs" />
