@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Alzaitu.BlackMagic.Playground
 {
@@ -12,29 +8,34 @@ namespace Alzaitu.BlackMagic.Playground
         public static void Main(string[] args)
         {
             var test = new TestClass();
-            var test2 = new TestClass();
             var r = new FakeTypedReference(__makeref(test));
             var ptr = (IntPtr*)Marshal.ReadIntPtr(r.Value).ToPointer();
-            r = new FakeTypedReference(__makeref(test2));
-            ptr = (IntPtr*) Marshal.ReadIntPtr(r.Value).ToPointer();
+            ptr[0] = typeof(SuperClass).TypeHandle.Value;
+            var s = new FakeTypedReference(r.Value, typeof(SuperClass)).GetValue<SuperClass>();
+            s.Test();
+            test.Test();
         }
     }
 
     public class SuperClass
     {
+        public string var = "SOME STRING";
+        public int test = 0x1234;
+
         public virtual void Test()
         {
             Console.WriteLine("No override");
         }
     }
 
-    public class TestClass : SuperClass
+    public class TestClass
     {
-        private string _var = "SOME STRING";
-        private int _test = 0x1234;
-        public override void Test()
+        public string var = "SOME STRING";
+        public int test = 0x1234;
+
+        public virtual void Test()
         {
             Console.WriteLine("Override");
         }
     }
-}
+}                                  
