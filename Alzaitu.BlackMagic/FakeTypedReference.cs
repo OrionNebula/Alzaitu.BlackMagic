@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Reflection;
 using System.Runtime.InteropServices;
 
 namespace Alzaitu.BlackMagic
@@ -8,7 +7,7 @@ namespace Alzaitu.BlackMagic
     /// Mimics the structure of a TypedReference so we can alter private properties.
     /// </summary>
     [StructLayout(LayoutKind.Sequential)]
-    internal unsafe struct FakeTypedReference
+    public unsafe struct FakeTypedReference
     {
         /// <summary>
         /// The address of the reference.
