@@ -1,0 +1,15 @@
+u4 - unknown (flags?)
+u4 - header length
+u4 - unknown
+
+u4 - total vtable entries
+u4 - type token
+u4[?] - methods
+u4 - contstructor function pointer
+u4 = 0x0 - marker for real methods
+
+
+
+Method slot: (this structure is inconsistent - only sometimes does the function pointer appear)
+u4[4] - unknown
+u4 - function pointer

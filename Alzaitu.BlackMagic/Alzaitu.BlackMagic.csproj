@@ -52,6 +52,7 @@
     <Compile Include="FakeTypedReference.cs" />
     <Compile Include="ObjectPlacement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RawJump.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppDomainExtensions.tt">
